@@ -21,10 +21,10 @@ jobs:
           sudo apt-get -y install musl-tools
 
       - name: Build
-        run: cargo build --release --bin dmd-rs --target x86_64-unknown-linux-musl
+        run: cargo build --release --bin main --target x86_64-unknown-linux-musl
 
       - name: save artifacts
         uses: actions/upload-artifact@v2
         with:
           name: rust-msul-builder
-          path: ./target/x86_64-unknown-linux-musl/release/create2crunch
+          path: ./target/x86_64-unknown-linux-musl/release/main
