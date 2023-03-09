@@ -1,0 +1,30 @@
+name: build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-unknown-linux-musl
+
+      - name: Setup dependencies
+        run: |
+          rustup target add x86_64-unknown-linux-musl
+          sudo apt-get -y update
+          sudo apt-get -y install musl-tools
+
+      - name: Build
+        run: cargo build --release --bin dmd-rs --target x86_64-unknown-linux-musl
+
+      - name: save artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: rust-msul-builder
+          path: ./target/x86_64-unknown-linux-musl/release/create2crunch

@@ -1,0 +1,12 @@
+.venv/
+
+.env
+
+.DS_Store
+
+# Added by cargo
+
+/target
+/target_docker
+
+output/
